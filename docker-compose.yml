@@ -1,0 +1,105 @@
+version: '3'
+
+volumes:
+  db-data-dev:
+  db-config-dev:
+    # ors-graphs:
+    # ors-elevation_cache:
+    # ors-logs:
+    # ors-logs-tomcat:
+    # ors-conf:
+
+
+networks:
+  home-assistant-net:
+    driver: bridge
+  # web:
+  #   external: true
+
+services:
+  gekko:
+    restart: always
+    build: ./gekko
+    # ports:
+    #   - 8080:80
+    volumes:
+      - ./gekko/app:/app
+    # depends_on:
+    #   - redis
+    command: /start-reload.sh
+    networks:
+      - home-assistant-net
+    # environment:
+    #   - MONGO_USER=yoda
+    #   - MONGO_PORT=27017
+    #   - MONGO_HOST=mongodb
+    #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+
+  forecaster:
+    restart: always
+    build: ./forecaster
+    # ports:
+    #   - 8080:80
+    volumes:
+      - ./forecaster/app:/app
+    # depends_on:
+    #   - redis
+    command: /start-reload.sh
+    networks:
+      - home-assistant-net
+    # environment:
+    #   - MONGO_USER=yoda
+    #   - MONGO_PORT=27017
+    #   - MONGO_HOST=mongodb
+    #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+
+  conductor:
+    restart: always
+    build: ./conductor
+    # ports:
+    #   - 8080:80
+    volumes:
+      - ./conductor/app:/app
+    # depends_on:
+    #   - redis
+    command: /start-reload.sh
+    networks:
+      - home-assistant-net
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - ./assistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+
+  mongodb:
+    # container_name: mongodb
+    # build: db
+    image: mongo:latest
+    volumes:
+      - db-data-dev:/data/db
+      - db-config-dev:/data/configdb
+    #   - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+    env_file:
+      - .env
+    environment:
+      # - MONGO_INITDB_ROOT_USERNAME=yoda
+      # - MONGO_INITDB_ROOT_PASSWORD=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      # - MONGODB_USER=${MONGO_INITDB_USERNAME}
+      # - MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
+      # - MONGODB_PASS=${MONGO_INITDB_PASSWORD}
+      # expose:
+      #   - 27017
+    ports:
+      - "27021:27017"
+    restart: always
+    command: [ --auth ]
+    networks:
+      - home-assistant-net
+      # - web
