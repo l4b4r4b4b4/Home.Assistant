@@ -14,7 +14,7 @@ docker-compose up -d
 
 ```
 
-Go to http://localhost:`8123`
+Go to [http://localhost:8123](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 # Application
 
