@@ -17,32 +17,6 @@ networks:
   #   external: true
 
 services:
-  spear-rest:
-    image: "dailab/spear-rest-interface"
-    restart: always
-    networks:
-      - home-assistant-net
-    ports:
-      - 8080:80
-
-  gekko:
-    restart: always
-    build: ./gekko
-    # ports:
-    #   - 8080:80
-    volumes:
-      - ./gekko/app:/app
-    # depends_on:
-    #   - redis
-    command: /start-reload.sh
-    networks:
-      - home-assistant-net
-    # environment:
-    #   - MONGO_USER=yoda
-    #   - MONGO_PORT=27017
-    #   - MONGO_HOST=mongodb
-    #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
-
   forecaster:
     restart: always
     build: ./forecaster
@@ -61,18 +35,44 @@ services:
     #   - MONGO_HOST=mongodb
     #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
 
-  conductor:
+  spear-rest:
+    image: "dailab/spear-rest-interface"
     restart: always
-    build: ./conductor
-    # ports:
-    #   - 8080:80
-    volumes:
-      - ./conductor/app:/app
-    # depends_on:
-    #   - redis
-    command: /start-reload.sh
     networks:
       - home-assistant-net
+    ports:
+      - 8080:8080
+
+  # gekko:
+  #   restart: always
+  #   build: ./gekko
+  #   # ports:
+  #   #   - 8080:80
+  #   volumes:
+  #     - ./gekko/app:/app
+  #   # depends_on:
+  #   #   - redis
+  #   command: /start-reload.sh
+  #   networks:
+  #     - home-assistant-net
+  #   # environment:
+  #   #   - MONGO_USER=yoda
+  #   #   - MONGO_PORT=27017
+  #   #   - MONGO_HOST=mongodb
+  #   #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+
+  # conductor:
+  #   restart: always
+  #   build: ./conductor
+  #   # ports:
+  #   #   - 8080:80
+  #   volumes:
+  #     - ./conductor/app:/app
+  #   # depends_on:
+  #   #   - redis
+  #   command: /start-reload.sh
+  #   networks:
+  #     - home-assistant-net
 
   homeassistant:
     container_name: homeassistant
