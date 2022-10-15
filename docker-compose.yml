@@ -20,8 +20,8 @@ services:
   forecaster:
     restart: always
     build: ./forecaster
-    # ports:
-    #   - 8080:80
+    ports:
+      - 5000:5000
     volumes:
       - ./forecaster/app:/app
     # depends_on:
@@ -84,30 +84,67 @@ services:
     privileged: true
     network_mode: host
 
-  mongodb:
-    # container_name: mongodb
-    # build: db
-    image: mongo:latest
-    volumes:
-      - db-data-dev:/data/db
-      - db-config-dev:/data/configdb
-    #   - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
-    env_file:
-      - .env
-    environment:
-      # - MONGO_INITDB_ROOT_USERNAME=yoda
-      # - MONGO_INITDB_ROOT_PASSWORD=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-      # - MONGODB_USER=${MONGO_INITDB_USERNAME}
-      # - MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
-      # - MONGODB_PASS=${MONGO_INITDB_PASSWORD}
-      # expose:
-      #   - 27017
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
     ports:
-      - "27021:27017"
-    restart: always
-    command: [ --auth ]
-    networks:
-      - home-assistant-net
-      # - web
+      - "8083:8083"
+      - "8086:8086"
+      - "8090:8090"
+      - "2003:2003"
+    env_file:
+      - 'env.influxdb'
+    volumes:
+      # Data persistency
+      # sudo mkdir -p /srv/docker/influxdb/data
+      - /srv/docker/influxdb/data:/var/lib/influxdb
+
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    links:
+      - influxdb
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    env_file:
+      - 'env.grafana'
+    user: "0"
+    links:
+      - influxdb
+    volumes:
+      # Data persistency
+      # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
+      - /srv/docker/grafana/data:/var/lib/grafana
+  # mongodb:
+  #   # container_name: mongodb
+  #   # build: db
+  #   image: mongo:latest
+  #   volumes:
+  #     - db-data-dev:/data/db
+  #     - db-config-dev:/data/configdb
+  #   #   - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     # - MONGO_INITDB_ROOT_USERNAME=yoda
+  #     # - MONGO_INITDB_ROOT_PASSWORD=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+  #     - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+  #     - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+  #     # - MONGODB_USER=${MONGO_INITDB_USERNAME}
+  #     # - MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
+  #     # - MONGODB_PASS=${MONGO_INITDB_PASSWORD}
+  #     # expose:
+  #     #   - 27017
+  #   ports:
+  #     - "27021:27017"
+  #   restart: always
+  #   command: [ --auth ]
+  #   networks:
+  #     - home-assistant-net
+  #     # - web

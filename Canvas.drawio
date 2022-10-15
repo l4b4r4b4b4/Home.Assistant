@@ -1,0 +1,153 @@
+<mxfile host="65bd71144e">
+    <diagram id="9kMbNbRDvSZ6Wi2sCQLu" name="Seite-1">
+        <mxGraphModel dx="286" dy="1461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="Regulated Actors (Gas / Electricity)" style="swimlane;" vertex="1" parent="1">
+                    <mxGeometry width="460" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="3" source="2" target="21">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Is" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="22">
+                    <mxGeometry x="0.1704" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="EVU" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="40" y="50" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;" edge="1" parent="3" source="4" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="IS" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="12">
+                    <mxGeometry x="-0.3143" y="-2" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="DSO&lt;br&gt;(Stromnetz Berlin)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="40" y="180" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="IS" style="edgeStyle=none;html=1;" edge="1" parent="3" source="6" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="TSO&lt;br&gt;(50Hertz)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="120" y="180" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=none;html=1;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="3" source="7" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="IS" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="14">
+                    <mxGeometry x="-0.3153" y="3" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="Supplier&lt;br&gt;(Lumenaza)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="190" y="180" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="SMGW-Admin&lt;br&gt;(Discovergy)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="270" y="180" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Aggregator&lt;br&gt;(Flexibility Trader)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="370" y="180" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Balancing group manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="3">
+                    <mxGeometry x="190" y="50" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="-20" width="370" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Data Lake / Backup" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+                    <mxGeometry x="580" y="164" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="CI / CD Pipeline" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="70" width="80" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="Models Library" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+                    <mxGeometry x="591" y="80" width="80" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="Cloud&lt;br&gt;Plattform&lt;br&gt;/ Asset Management" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+                    <mxGeometry x="680" y="50" width="90" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="370" width="340" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="WEB APIs" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-91;" vertex="1" parent="1">
+                    <mxGeometry x="208" y="390" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="" style="endArrow=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="31" target="31">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="430" y="440" as="sourcePoint"/>
+                        <mxPoint x="480" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="Smart Meter Gateway" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="255" y="390" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <UserObject label="Home Assistance API" link="http://localhost:8123" id="35">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                        <mxGeometry x="395" y="390" width="130" height="30" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="" link="http://localhost:8123" id="45">
+                    <mxCell style="group" vertex="1" connectable="0" parent="1">
+                        <mxGeometry x="220" y="439.742783048749" width="340" height="60.51443390250199" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="36" value="" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="45">
+                    <mxGeometry y="0.25721695125099586" width="340" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="UI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-91;" vertex="1" parent="45">
+                    <mxGeometry x="-12" y="15.257216951250996" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="endArrow=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;dashed=1;" edge="1" source="36" parent="45">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="210" y="60.257216951250996" as="sourcePoint"/>
+                        <mxPoint x="170" y="20.257216951250996" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="" style="endArrow=none;html=1;dashed=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="45">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="309" y="19.257216951250996" as="sourcePoint"/>
+                        <mxPoint x="31.735929330786632" y="18.997715427345895" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="42" value="Home.Assistant" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="45">
+                    <mxGeometry x="100" y="0.25721695125099586" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="Home Owner UI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="45">
+                    <mxGeometry x="35" y="30.257216951250996" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="Technical Operator UI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="45">
+                    <mxGeometry x="175" y="30.257216951250996" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="Predictive Agents" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="20" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="500.26" width="340" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="Automation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-91;" vertex="1" parent="1">
+                    <mxGeometry x="208" y="520.26" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="" style="endArrow=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="47" target="47" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="430" y="570.26" as="sourcePoint"/>
+                        <mxPoint x="480" y="520.26" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <UserObject label="Energy Forecaster" link="http://localhost:5000" id="50">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                        <mxGeometry x="255" y="520.26" width="130" height="30" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Energy Simulator &amp;amp; Optimizer" link="http://localhost:8080" id="51">
+                    <mxCell style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                        <mxGeometry x="395" y="520.26" width="130" height="30" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
