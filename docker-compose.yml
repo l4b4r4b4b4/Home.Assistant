@@ -17,6 +17,14 @@ networks:
   #   external: true
 
 services:
+  spear-rest:
+    image: "dailab/spear-rest-interface"
+    restart: always
+    networks:
+      - home-assistant-net
+    ports:
+      - 8080:80
+
   gekko:
     restart: always
     build: ./gekko
