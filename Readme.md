@@ -14,7 +14,9 @@ docker-compose up -d
 
 ```
 
-Go to [http://localhost:8123](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+Go to [http://localhost:8123](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for Home.Assistant
+
+Got to [http://localhost:8080/](http://localhost:8080/) for Simulation and Optimization API
 
 # Application
 
