@@ -1,0 +1,12 @@
+homeassistant:
+  name: Home.Assistant
+  latitude: xx.xxxx
+  longitude: xx.xxxx
+  unit_system: metric
+  time_zone: Europe/Berlin
+
+panel_iframe:
+  node_red:
+    title: Node Red
+    icon: mdi:sitemap
+    url: nodered:1880

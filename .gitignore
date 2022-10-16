@@ -6,6 +6,12 @@ archive
 # C extensions
 *.so
 
+# Home Assistant
+.cloud
+.storage
+home-assistant.log*
+.HA_VERSION
+
 # Distribution / packaging
 .Python
 build/
