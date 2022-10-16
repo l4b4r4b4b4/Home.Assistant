@@ -50,6 +50,7 @@ The Home Owner Manangement System (HOMS) onsite and a aggregator / customer plat
 1. Webshop powered by [Saleor.io](https://saleor.io/) to buy
    1. Managed Software-as-a-Service with three different Service Level Agreements (SLAs)
    2. Pre-configured hardware components
+   3. (Power purchase agreements)[https://de.wikipedia.org/wiki/Power_Purchase_Agreement]
 2. Self service Portal for TSO, DSO, Flexible Suppliers
 3. [Enterprise Resource Planning](https://www.investopedia.com/terms/e/erp.asp) (ERP) powered by [metasfresh](https://metasfresh.com/)
 4. Help Desk / Ticketing System powered by [Zammad](https://zammad.com/de)
