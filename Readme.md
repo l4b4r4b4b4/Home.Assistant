@@ -31,7 +31,11 @@ Got to [http://localhost:8090](http://localhost:8090) for Timeseries Database
 
 # Application
 
-The Application comprises of a number of parts:
+The Application comprises of a number of two part:
+
+The Home Owner Manangement System (HOMS) onsite and a aggregator / customer plattform in the cloud.
+
+HOMS:
 
 1. Home Owner UI powered by [Home.Assistant](https://www.home-assistant.io/)
 2. [SPEAR-API by DAI-Lab](https://gitlab.dai-labor.de/spear/spear-optimisation) for Simulation and Optimization
@@ -40,6 +44,18 @@ The Application comprises of a number of parts:
 5. Automation Module with [Node Red](https://nodered.org/)
 6. Timeseries database [InfluxDB](https://www.influxdata.com/)
 7. Dashboard Cockpit powered by [Grafana](https://grafana.com/)
+
+Aggregator Plattform:
+
+1. Webshop powered by [Saleor.io](https://saleor.io/) to buy
+   1. Managed Software-as-a-Service with three different Service Level Agreements (SLAs)
+   2. Pre-configured hardware components
+2. Self service Portal for TSO, DSO, Flexible Suppliers
+3. [Enterprise Resource Planning](https://www.investopedia.com/terms/e/erp.asp) (ERP) powered by [metasfresh](https://metasfresh.com/)
+4. Help Desk / Ticketing System powered by [Zammad](https://zammad.com/de)
+5. SMGW-Admin ([Discovergy White Label](https://discovergy.com/smart-metering-loesungen/white-label))
+6. Balancing group management
+7. Plattform Frontend Stack: Microfrontends with NeRNM ([NextJS](https://nextjs.org/), [ReactJS](https://reactjs.org/), [NodeJS](https://nodejs.org/), [MongoDB](https://www.mongodb.com/de-de))
 
 # Local Development with docker compose
 
