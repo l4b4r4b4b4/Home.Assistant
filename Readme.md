@@ -31,7 +31,7 @@ Got to [http://localhost:8090](http://localhost:8090) for Timeseries Database
 
 # Application
 
-The Application comprises of a number of two part:
+The Application comprises of two parts and empowers the operator to become a combined heat and power supplier / aggregator:
 
 The Home Owner Manangement System (HOMS) onsite and a aggregator / customer plattform in the cloud.
 
