@@ -23,24 +23,33 @@ Got to [http://localhost:5001/](http://localhost:5001/) for Forecaster API and [
 
 Got to [http://localhost:5000/](http://localhost:5000/) for Predictive Maintenance Agent API and [http://localhost:5000/docs/](http://localhost:5000/docs) for Documentation
 
-Got to [http://localhost:1880](http://localhost:1880) for Automation with Node Red
+Got to [http://localhost:1880](http://localhost:1880) for Automation with [Node Red](https://nodered.org/)
 
-Got to [http://localhost:3000](http://localhost:3000) for Grafana
+Got to [http://localhost:3000](http://localhost:3000) for Dashboard Cockpit
 
-Got to [http://localhost:8090](http://localhost:8090) for InfluxDB Database
+Got to [http://localhost:8090](http://localhost:8090) for Timeseries Database
 
 # Application
 
-The Application comprises of three parts
+The Application comprises of a number of parts:
 
-```
-sudo curl https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-```
+1. Home Owner UI powered by [Home.Assistant](https://www.home-assistant.io/)
+2. [SPEAR-API by DAI-Lab](https://gitlab.dai-labor.de/spear/spear-optimisation) for Simulation and Optimization
+3. Forecaster API powered by [Meta&#39;s Prophet](https://facebook.github.io/prophet/) & [Fast-API](https://fastapi.tiangolo.com/)
+4. Predictive Maintenance API powered by [Meta&#39;s Prophet](https://facebook.github.io/prophet/) & [Fast-API](https://fastapi.tiangolo.com/)
+5. Automation Module with [Node Red](https://nodered.org/)
+6. Timeseries database [InfluxDB](https://www.influxdata.com/)
+7. Dashboard Cockpit powered by [Grafana](https://grafana.com/)
 
 # Local Development with docker compose
 
-# Cloud Deployment with cloudbuild.yml
+Stop application and remove volumes. Build images locally. Start application.
 
+```
+docker-compose down -v && docker-compose up -d --build && docker-compose logs -f -t
+```
+
+# Cloud Deployment with cloudbuild.yml
 
 # Testing and Playgrounds
 
