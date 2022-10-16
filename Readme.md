@@ -35,7 +35,7 @@ The Application comprises of a number of two part:
 
 The Home Owner Manangement System (HOMS) onsite and a aggregator / customer plattform in the cloud.
 
-HOMS:
+## Home Owner Manangement System
 
 1. Home Owner UI powered by [Home.Assistant](https://www.home-assistant.io/)
 2. [SPEAR-API by DAI-Lab](https://gitlab.dai-labor.de/spear/spear-optimisation) for Simulation and Optimization
@@ -45,7 +45,7 @@ HOMS:
 6. Timeseries database [InfluxDB](https://www.influxdata.com/)
 7. Dashboard Cockpit powered by [Grafana](https://grafana.com/)
 
-Aggregator Plattform:
+## Aggregator Plattform
 
 1. Webshop powered by [Saleor.io](https://saleor.io/) to buy
    1. Managed Software-as-a-Service with three different Service Level Agreements (SLAs)
