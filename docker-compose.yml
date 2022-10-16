@@ -3,15 +3,12 @@ version: '3'
 volumes:
   db-data-dev:
   db-config-dev:
-    # ors-graphs:
-    # ors-elevation_cache:
-    # ors-logs:
-    # ors-logs-tomcat:
-    # ors-conf:
-
+  nodered-data:
+  grafana-data: 
+  influxdb-data:
 
 networks:
-  home-assistant-net:
+  home-area-net:
     driver: bridge
   # web:
   #   external: true
@@ -21,58 +18,48 @@ services:
     restart: always
     build: ./forecaster
     ports:
-      - 5000:5000
+      - 5000:80
     volumes:
       - ./forecaster/app:/app
-    # depends_on:
-    #   - redis
-    command: /start-reload.sh
+    depends_on:
+      - influxdb
     networks:
-      - home-assistant-net
+      - home-area-net
+    # command: /start-reload.sh
     # environment:
     #   - MONGO_USER=yoda
     #   - MONGO_PORT=27017
     #   - MONGO_HOST=mongodb
     #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
-
+  
+  maintenance-agent:
+    restart: always
+    build: ./maintenance-agent
+    ports:
+      - 5001:80
+    volumes:
+      - ./maintenance-agent/app:/app
+    depends_on:
+      - influxdb
+    networks:
+      - home-area-net
   spear-rest:
     image: "dailab/spear-rest-interface"
     restart: always
     networks:
-      - home-assistant-net
+      - home-area-net
     ports:
       - 8080:8080
 
-  # gekko:
-  #   restart: always
-  #   build: ./gekko
-  #   # ports:
-  #   #   - 8080:80
-  #   volumes:
-  #     - ./gekko/app:/app
-  #   # depends_on:
-  #   #   - redis
-  #   command: /start-reload.sh
-  #   networks:
-  #     - home-assistant-net
-  #   # environment:
-  #   #   - MONGO_USER=yoda
-  #   #   - MONGO_PORT=27017
-  #   #   - MONGO_HOST=mongodb
-  #   #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
-
-  # conductor:
-  #   restart: always
-  #   build: ./conductor
-  #   # ports:
-  #   #   - 8080:80
-  #   volumes:
-  #     - ./conductor/app:/app
-  #   # depends_on:
-  #   #   - redis
-  #   command: /start-reload.sh
-  #   networks:
-  #     - home-assistant-net
+  nodered:
+    image: nodered/node-red-docker:v8
+    restart: unless-stopped
+    ports:
+      - 1880:1880
+      - 9229:9229
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - nodered-data:/data
 
   homeassistant:
     container_name: homeassistant
@@ -96,8 +83,7 @@ services:
       - 'env.influxdb'
     volumes:
       # Data persistency
-      # sudo mkdir -p /srv/docker/influxdb/data
-      - /srv/docker/influxdb/data:/var/lib/influxdb
+      - influxdb-data:/var/lib/influxdb
 
   telegraf:
     image: telegraf:latest
@@ -119,32 +105,63 @@ services:
       - influxdb
     volumes:
       # Data persistency
-      # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
-      - /srv/docker/grafana/data:/var/lib/grafana
-  # mongodb:
-  #   # container_name: mongodb
-  #   # build: db
-  #   image: mongo:latest
-  #   volumes:
-  #     - db-data-dev:/data/db
-  #     - db-config-dev:/data/configdb
-  #   #   - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     # - MONGO_INITDB_ROOT_USERNAME=yoda
-  #     # - MONGO_INITDB_ROOT_PASSWORD=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
-  #     - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-  #     - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-  #     # - MONGODB_USER=${MONGO_INITDB_USERNAME}
-  #     # - MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
-  #     # - MONGODB_PASS=${MONGO_INITDB_PASSWORD}
-  #     # expose:
-  #     #   - 27017
-  #   ports:
-  #     - "27021:27017"
+      - grafana-data:/var/lib/grafana
+  
+  mongodb:
+    # container_name: mongodb
+    # build: db
+    image: mongo:latest
+    volumes:
+      - db-data-dev:/data/db
+      - db-config-dev:/data/configdb
+    #   - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+    env_file:
+      - .env
+    environment:
+      # - MONGO_INITDB_ROOT_USERNAME=yoda
+      # - MONGO_INITDB_ROOT_PASSWORD=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      # - MONGODB_USER=${MONGO_INITDB_USERNAME}
+      # - MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
+      # - MONGODB_PASS=${MONGO_INITDB_PASSWORD}
+      # expose:
+      #   - 27017
+    ports:
+      - "27021:27017"
+    restart: always
+    command: [ --auth ]
+    networks:
+      - home-area-net
+      # - web
+
+ # gekko:
   #   restart: always
-  #   command: [ --auth ]
+  #   build: ./gekko
+  #   # ports:
+  #   #   - 8080:80
+  #   volumes:
+  #     - ./gekko/app:/app
+  #   # depends_on:
+  #   #   - redis
+  #   command: /start-reload.sh
   #   networks:
-  #     - home-assistant-net
-  #     # - web
+  #     - home-area-net
+  #   # environment:
+  #   #   - MONGO_USER=yoda
+  #   #   - MONGO_PORT=27017
+  #   #   - MONGO_HOST=mongodb
+  #   #   - MONGO_PASS=OTvJLn3GkK8cfeEwgsTIAxHR36FX9QUfdaXcexDH4W9XR76mOPiepQcfB5T3Mdzv
+
+  # conductor:
+  #   restart: always
+  #   build: ./conductor
+  #   # ports:
+  #   #   - 8080:80
+  #   volumes:
+  #     - ./conductor/app:/app
+  #   # depends_on:
+  #   #   - redis
+  #   command: /start-reload.sh
+  #   networks:
+  #     - home-area-net

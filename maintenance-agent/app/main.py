@@ -16,18 +16,9 @@ class AnalysisInput(BaseModel):
     # weights: List[float]
     
 
-@app.get("/learn")
-async def learn(analysisInput: AnalysisInput):
+@app.get("/")
+async def optimize(analysisInput: AnalysisInput):
     # First we’ll import the data:
-    df = pd.read_csv('https://raw.githubusercontent.com/facebook/prophet/main/examples/example_wp_log_peyton_manning.csv')
-    df.head()
-    # We fit the model by instantiating a new Prophet object. Any settings to the forecasting procedure are passed into the constructor. Then you call its fit method and pass in the historical dataframe. Fitting should take 1-5 seconds.
-    m = Prophet()
-    m.fit(df)
-    return True
-
-@app.get("/predict")
-async def predict(analysisInput: AnalysisInput):
     df = pd.read_csv('https://raw.githubusercontent.com/facebook/prophet/main/examples/example_wp_log_peyton_manning.csv')
     df.head()
     # We fit the model by instantiating a new Prophet object. Any settings to the forecasting procedure are passed into the constructor. Then you call its fit method and pass in the historical dataframe. Fitting should take 1-5 seconds.
@@ -40,11 +31,17 @@ async def predict(analysisInput: AnalysisInput):
     forecast = m.predict(future)
     forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
     # You can plot the forecast by calling the Prophet.plot method and passing in your forecast dataframe.
-    # fig1 = m.plot(forecast)
-    # # # If you want to see the forecast components, you can use the Prophet.plot_components method. By default you’ll see the trend, yearly seasonality, and weekly seasonality of the time series. If you include holidays, you’ll see those here, too.
-    # # fig2 = m.plot_components(forecast)
-    # # # An interactive figure of the forecast and components can be created with plotly. You will need to install plotly 4.0 or above separately, as it will not by default be installed with prophet. You will also need to install the notebook and ipywidgets packages.
-    # plot_plotly(m, forecast)
-    # plot_components_plotly(m, forecast)
-    return future
-    
+    fig1 = m.plot(forecast)
+    # If you want to see the forecast components, you can use the Prophet.plot_components method. By default you’ll see the trend, yearly seasonality, and weekly seasonality of the time series. If you include holidays, you’ll see those here, too.
+    fig2 = m.plot_components(forecast)
+    # An interactive figure of the forecast and components can be created with plotly. You will need to install plotly 4.0 or above separately, as it will not by default be installed with prophet. You will also need to install the notebook and ipywidgets packages.
+    # Python
+
+    plot_plotly(m, forecast)
+    plot_components_plotly(m, forecast)
+    return forecast
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return {"item_id": item_id, "q": q}
